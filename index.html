@@ -84,14 +84,15 @@
 			position: fixed;
 			top: 50%;
 			left: 30px;
-			transform: translateY(-50%) translateX(-450px);
+			transform: translateY(-50%) translateX(-550px);
 			max-width: 400px;
+			width: calc(100% - 60px);
 			max-height: 80vh;
-			background: rgba(10, 10, 10, 0.92);
+			background: rgba(10, 10, 10, 0.95);
 			backdrop-filter: blur(15px);
 			border: 1px solid rgba(255, 215, 0, 0.3);
 			border-left: 4px solid #ffd700;
-			padding: 40px;
+			padding: 30px;
 			color: #eee;
 			font-family: 'Georgia', serif;
 			box-shadow: 20px 0 50px rgba(0,0,0,0.8);
@@ -102,6 +103,24 @@
 
 		#side-letter.active {
 			transform: translateY(-50%) translateX(0);
+		}
+
+		@media (max-width: 600px) {
+			#side-letter {
+				left: 20px;
+				width: calc(100% - 40px);
+				padding: 20px;
+				transform: translateY(-50%) translateX(-120%);
+			}
+			#side-letter.active {
+				transform: translateY(-50%) translateX(0);
+			}
+			#toggleLetter {
+				bottom: 20px !important;
+				left: 20px !important;
+				padding: 12px 24px !important;
+				font-size: 14px !important;
+			}
 		}
 
 		.letter-content {
@@ -185,6 +204,7 @@
 	<div id="side-letter">
 		<div class="letter-header">
 			<div class="letter-date">February 14, 2026</div>
+
 		</div>
 		<div class="letter-content">
 			<h2>My dearest Aleck,</h2>
@@ -202,7 +222,7 @@
 	<div id="notification">Optimize your view: Zoom in for precision ❤️</div>
 	
 	<div id="overlay">
-		<h1>Are you ready? ❤️</h1>
+		<h1>Can You Be My Valentine? ❤️</h1>
 		<div class="btn-container">
 			<button id="yesBtn">Yes!</button>
 			<button id="noBtn">No</button>
