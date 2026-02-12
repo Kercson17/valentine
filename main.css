@@ -12,8 +12,8 @@ body {
 }
 
 p {
-    font-size: 8px; /* Slightly larger for better alignment stability */
-    line-height: 0.9; /* Precise line spacing */
+    font-size: 5px; /* Smaller font for higher detail */
+    line-height: 3px; /* Much tighter line height for maximum density */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -25,15 +25,16 @@ p {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     word-wrap: normal;
-    word-break: keep-all; /* Prevents "breeching" or breaking words in half */
+    word-break: keep-all;
     user-select: none;
     display: block;
+    letter-spacing: -1px; /* Tighter letters to fill gaps */
 }
 
 @media (max-width: 600px) {
     p {
-        font-size: 6px;
-        line-height: 0.85;
+        font-size: 3px; /* Extra small on mobile for high-detail reveal */
+        line-height: 2px;
     }
 }
 

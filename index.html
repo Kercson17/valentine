@@ -61,9 +61,40 @@
 			color: white;
 			position: relative; /* Changed to relative so it starts in the flow next to Yes */
 		}
+
+		/* Fierce/Elegant notification styling - Centered */
+		#notification {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%) scale(0.8);
+			background: rgba(10, 10, 10, 0.95);
+			color: #ffd700;
+			padding: 20px 40px;
+			border: 2px solid #ffd700;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+			font-weight: bold;
+			font-family: 'Georgia', serif;
+			font-size: 16px;
+			text-align: center;
+			box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+			transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+			z-index: 2000;
+			pointer-events: none;
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		#notification.show {
+			transform: translate(-50%, -50%) scale(1);
+			opacity: 1;
+			visibility: visible;
+		}
 	</style>
 </head>
 <body>
+	<div id="notification">Optimize your view: Zoom in for precision ❤️</div>
 	<div id="overlay">
 		<h1>Are you ready? ❤️</h1>
 		<div class="btn-container">
@@ -113,18 +144,28 @@
 			overlay.style.display = 'none';
 			music.play();
 			
-			const maxChars = 800000; 
-			let currentChars = 0;
+			// Show the fierce notification first
+			const notify = document.getElementById('notification');
+			notify.classList.add('show');
+			
+			// Wait 3 seconds before starting the face reveal
+			setTimeout(() => {
+				notify.classList.remove('show');
+				
+				// Start the typing animation after the notification
+				const maxChars = 800000; 
+				let currentChars = 0;
 
-			function addMore() {
-				if (currentChars < maxChars) {
-					const chunk = 30; // Smaller chunks for a smoother, slower look
-					mask.appendChild(document.createTextNode(phrase.repeat(chunk)));
-					currentChars += chunk * phrase.length;
-					setTimeout(addMore, 60); // Much slower interval to match the song's pace
+				function addMore() {
+					if (currentChars < maxChars) {
+						const chunk = 50; // Increased chunk size for faster filling
+						mask.appendChild(document.createTextNode(phrase.repeat(chunk)));
+						currentChars += chunk * phrase.length;
+						setTimeout(addMore, 30); // Reduced delay from 60ms to 30ms
+					}
 				}
-			}
-			addMore();
+				addMore();
+			}, 3000);
 		}
 
 		yesBtn.addEventListener('click', startExperience);
