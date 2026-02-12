@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>Valentine</title>
 	<link rel="stylesheet" href="./main.css" />
 	<style>
@@ -12,13 +12,13 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background: rgba(0,0,0,0.9);
+			background: rgba(0,0,0,0.95);
 			color: white;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			z-index: 1000;
+			z-index: 3000;
 			font-family: 'Arial', sans-serif;
 			text-align: center;
 			padding: 20px;
@@ -29,7 +29,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			gap: 20px; /* Perfect spacing between Yes and No */
+			gap: 20px;
 			position: relative;
 			width: 100%;
 			max-width: 400px;
@@ -44,33 +44,20 @@
 			transition: all 0.3s ease;
 			font-weight: bold;
 			box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-			z-index: 1001;
+			z-index: 3001;
 		}
 
-		#yesBtn {
-			background-color: #ff4d6d;
-			color: white;
-		}
+		#yesBtn { background-color: #ff4d6d; color: white; }
+		#noBtn { background-color: #555; color: white; position: relative; }
 
-		#yesBtn:hover {
-			transform: scale(1.1);
-		}
-
-		#noBtn {
-			background-color: #555;
-			color: white;
-			position: relative; /* Changed to relative so it starts in the flow next to Yes */
-		}
-
-		/* Fierce/Elegant notification styling - Centered */
 		#notification {
 			position: fixed;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%) scale(0.8);
-			background: rgba(10, 10, 10, 0.95);
+			background: rgba(10, 10, 10, 0.98);
 			color: #ffd700;
-			padding: 20px 40px;
+			padding: 25px 45px;
 			border: 2px solid #ffd700;
 			text-transform: uppercase;
 			letter-spacing: 3px;
@@ -78,12 +65,12 @@
 			font-family: 'Georgia', serif;
 			font-size: 16px;
 			text-align: center;
-			box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
-			transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-			z-index: 2000;
+			box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+			z-index: 4000;
 			pointer-events: none;
 			opacity: 0;
 			visibility: hidden;
+			transition: all 0.5s ease-out;
 		}
 
 		#notification.show {
@@ -91,10 +78,129 @@
 			opacity: 1;
 			visibility: visible;
 		}
+
+		/* Professional Side Letter Styling */
+		#side-letter {
+			position: fixed;
+			top: 50%;
+			left: 30px;
+			transform: translateY(-50%) translateX(-450px);
+			max-width: 400px;
+			max-height: 80vh;
+			background: rgba(10, 10, 10, 0.92);
+			backdrop-filter: blur(15px);
+			border: 1px solid rgba(255, 215, 0, 0.3);
+			border-left: 4px solid #ffd700;
+			padding: 40px;
+			color: #eee;
+			font-family: 'Georgia', serif;
+			box-shadow: 20px 0 50px rgba(0,0,0,0.8);
+			z-index: 2500;
+			transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+			overflow-y: auto;
+		}
+
+		#side-letter.active {
+			transform: translateY(-50%) translateX(0);
+		}
+
+		.letter-content {
+			font-size: 15px;
+			line-height: 1.8;
+			text-align: justify;
+		}
+
+		.letter-header {
+			border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+			margin-bottom: 20px;
+			padding-bottom: 10px;
+		}
+
+		.letter-date {
+			font-size: 12px;
+			color: #ffd700;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			margin-bottom: 10px;
+		}
+
+		.letter-content h2 {
+			color: #ffd700;
+			font-size: 22px;
+			margin: 0;
+			font-style: italic;
+		}
+
+		.letter-footer {
+			margin-top: 30px;
+			border-top: 1px solid rgba(255, 215, 0, 0.2);
+			padding-top: 15px;
+			font-style: italic;
+		}
+
+		/* Toggle Button Styling */
+		#toggleLetter {
+			position: fixed;
+			bottom: 30px;
+			left: 30px;
+			z-index: 2600;
+			background: rgba(10, 10, 10, 0.9);
+			border: 1px solid #ffd700;
+			color: #ffd700;
+			padding: 10px 20px;
+			border-radius: 0;
+			font-family: 'Georgia', serif;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			font-size: 12px;
+			transition: all 0.3s ease;
+			display: none; /* Hidden until experience starts */
+		}
+
+		#toggleLetter:hover {
+			background: #ffd700;
+			color: #000;
+		}
+
+		/* Resetting mask styles for letter text */
+		#side-letter p {
+			background: none !important;
+			-webkit-background-clip: initial !important;
+			-webkit-text-fill-color: initial !important;
+			color: #ddd !important;
+			font-size: 15px !important;
+			line-height: 1.8 !important;
+			height: auto !important;
+			width: auto !important;
+			text-align: justify !important;
+			overflow: visible !important;
+			padding: 0 !important;
+			margin-bottom: 15px;
+		}
 	</style>
 </head>
 <body>
+	<button id="toggleLetter">Open Letter</button>
+
+	<div id="side-letter">
+		<div class="letter-header">
+			<div class="letter-date">February 14, 2026</div>
+		</div>
+		<div class="letter-content">
+			<h2>My dearest Aleck,</h2>
+			<p>Happy Monthsary and Happy Valentine’s Day, my love. ❤️</p>
+			<p>I just want to remind you how truly amazing you are. You are so hardworking, always giving your best no matter how tired you may be. I admire your strength and dedication more than you know.</p>
+			<p>You are the sweetest and most lovely person. Your kindness, your smile, and your caring heart make everything brighter. And of course, you are so beautiful — not just on the outside, but in your heart, in your actions, and in the way you love.</p>
+			<p>I feel so thankful and blessed to have you in my life. I’m so proud of you, and I appreciate you more than words can explain.</p>
+			<p>I love you always.</p>
+			<div class="letter-footer">
+				Forever yours,
+			</div>
+		</div>
+	</div>
+
 	<div id="notification">Optimize your view: Zoom in for precision ❤️</div>
+	
 	<div id="overlay">
 		<h1>Are you ready? ❤️</h1>
 		<div class="btn-container">
@@ -110,58 +216,65 @@
 	<p id="mask"></p>
 
 	<script>
-		const phrase = "Will You Be My Valentine? ";
+		const phrase = `My dearest Aleck, Happy Valentine’s Day, my love. And happy late monthsary to us. Even if this message comes a little late, please know that my love for you is always on time. It never skips a day. It never forgets you. Today, I don’t just want to celebrate love — I want to celebrate us. I want to celebrate your patience, your strength, your softness, and the way you continue to choose me even when I make it hard. Aleck, I know I can be hard-headed. I know there are times when I let my pride take control instead of listening to your heart. There are moments when I respond too quickly, speak without thinking, or stand firm when I should be understanding. And for all those times, I am truly, deeply sorry. You don’t deserve the stubborn version of me. You deserve the gentle one. The one who listens. The one who understands. The one who protects your feelings instead of challenging them. I may not always get it right, but please believe me when I say I am trying. I am learning. I am growing — because loving you makes me want to become better. Thank you for staying. Thank you for staying even when I’m difficult. Thank you for staying when misunderstandings feel heavy. Thank you for staying when my hard-headed side shows up. Thank you for choosing us instead of walking away. Not everyone would. Not everyone has the patience and strength that you have. And that’s one of the many reasons why I admire you so much. You are strong in ways you don’t even see. You love deeply. You care sincerely. And even when things get tough, you still hold on. That means everything to me. This Valentine’s Day, I don’t just want to give you sweet words. I want to give you reassurance. I want you to feel secure in my love. I want you to know that I am not here temporarily. I am not here only when things are easy. I am here for the long run. I am here for growth. I am here for us. Loving you isn’t just about the happy days, the laughter, or the sweet moments. It’s also about choosing each other on hard days. It’s about choosing patience over pride. Understanding over ego. Love over stubbornness. And I choose you, Aleck. Every day. I promise to work on my hard-headedness. I promise to listen more than I argue. I promise to calm down before reacting. I promise to protect your heart the same way you protect mine. You are not just my Valentine for today. You are my love in every season — in the quiet days, the loud days, the emotional days, and the peaceful ones. You are the person I want to build memories with. The person I want to grow with. The person I want beside me when life feels heavy and when life feels beautiful. Happy Valentine’s Day, my love. Happy monthsary to us — even if it’s a little late. Thank you for staying. Thank you for loving me. Thank you for being you. I love you more than my pride, more than my stubbornness, and more than my own comfort. And that means I will always fight to become better for you. Forever yours, With all my love. `;
 		const mask = document.getElementById('mask');
 		const music = document.getElementById('bg-music');
 		const overlay = document.getElementById('overlay');
 		const noBtn = document.getElementById('noBtn');
 		const yesBtn = document.getElementById('yesBtn');
+		const notify = document.getElementById('notification');
+		const toggleBtn = document.getElementById('toggleLetter');
+		const sideLetter = document.getElementById('side-letter');
 		
-		// Make the "No" button run away
 		noBtn.addEventListener('mouseover', moveButton);
-		noBtn.addEventListener('touchstart', moveButton);
+		noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveButton(); });
 
-		function moveButton(e) {
-			// Ensure the button stays absolute so it can "run" anywhere on the screen
+		function moveButton() {
 			noBtn.style.position = 'fixed'; 
-			
-			// Calculate padding so it doesn't stick to the very edge
-			const padding = 20;
+			const padding = 50;
 			const maxX = window.innerWidth - noBtn.clientWidth - padding;
 			const maxY = window.innerHeight - noBtn.clientHeight - padding;
-
-			// Generate a position that is definitely on screen
 			const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
 			const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
-
 			noBtn.style.left = randomX + 'px';
 			noBtn.style.top = randomY + 'px';
-			noBtn.style.right = 'auto'; // Reset right/bottom if they were set
-			noBtn.style.bottom = 'auto';
 		}
+
+		toggleBtn.addEventListener('click', () => {
+			sideLetter.classList.toggle('active');
+			toggleBtn.innerText = sideLetter.classList.contains('active') ? "Close Letter" : "Open Letter";
+		});
 
 		function startExperience() {
 			overlay.style.display = 'none';
 			music.play();
 			
-			// Show the fierce notification first
-			const notify = document.getElementById('notification');
+			// Clear any existing text to ensure the animation is visible from the start
+			mask.innerText = "";
+			
 			notify.classList.add('show');
 			
-			// Wait 3 seconds before starting the face reveal
+			// Show toggle button after notification
+			const sideLetter = document.getElementById('side-letter');
+			const toggleBtn = document.getElementById('toggleLetter');
+			setTimeout(() => {
+				toggleBtn.style.display = 'block';
+			}, 3000);
+			
 			setTimeout(() => {
 				notify.classList.remove('show');
 				
-				// Start the typing animation after the notification
-				const maxChars = 800000; 
+				const targetChars = 400000; 
 				let currentChars = 0;
 
 				function addMore() {
-					if (currentChars < maxChars) {
-						const chunk = 50; // Increased chunk size for faster filling
-						mask.appendChild(document.createTextNode(phrase.repeat(chunk)));
-						currentChars += chunk * phrase.length;
-						setTimeout(addMore, 30); // Reduced delay from 60ms to 30ms
+					if (currentChars < targetChars) {
+						// Adding the full letter as a single "chunk" makes it feel like rapid typing
+						mask.appendChild(document.createTextNode(phrase));
+						currentChars += phrase.length;
+						
+						// Speed of the reveal - adjusted to be fast but visible
+						setTimeout(addMore, 40); 
 					}
 				}
 				addMore();

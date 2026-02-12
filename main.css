@@ -12,42 +12,33 @@ body {
 }
 
 p {
-    font-size: 5px; /* Smaller font for higher detail */
-    line-height: 3px; /* Much tighter line height for maximum density */
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 9px;
+    line-height: 9px;
     text-align: center;
     margin: 0;
     padding: 0;
     width: 100vw;
-    min-height: 100vh;
-    background: url(image.jpg) no-repeat center center;
+    height: 100vh;
+    
+    /* Darker overall with a natural spotlight on the face */
+    background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%), url(image.jpg) no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
+    
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     word-wrap: normal;
-    word-break: keep-all;
+    word-break: normal;
     user-select: none;
     display: block;
-    letter-spacing: -1px; /* Tighter letters to fill gaps */
+    overflow: hidden;
 }
 
 @media (max-width: 600px) {
     p {
-        font-size: 3px; /* Extra small on mobile for high-detail reveal */
-        line-height: 2px;
-    }
-}
-
-@media (max-width: 600px) {
-    p {
-        font-size: 4px;
-        line-height: 3px;
-    }
-}
-
-@media (max-width: 600px) {
-    p {
-        font-size: 4px;
-        line-height: 3px;
+        font-size: 7.5px;
+        line-height: 7.5px;
     }
 }
