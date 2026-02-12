@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+p {
+    font-size: 8px; /* Slightly larger for better alignment stability */
+    line-height: 0.9; /* Precise line spacing */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    min-height: 100vh;
+    background: url(image.jpg) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    word-wrap: normal;
+    word-break: keep-all; /* Prevents "breeching" or breaking words in half */
+    user-select: none;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    p {
+        font-size: 6px;
+        line-height: 0.85;
+    }
+}
+
+@media (max-width: 600px) {
+    p {
+        font-size: 4px;
+        line-height: 3px;
+    }
+}
+
+@media (max-width: 600px) {
+    p {
+        font-size: 4px;
+        line-height: 3px;
+    }
+}

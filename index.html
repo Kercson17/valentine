@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Valentine</title>
+	<link rel="stylesheet" href="./main.css" />
+	<style>
+		#overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.9);
+			color: white;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			z-index: 1000;
+			font-family: 'Arial', sans-serif;
+			text-align: center;
+			padding: 20px;
+		}
+
+		.btn-container {
+			margin-top: 30px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 20px; /* Perfect spacing between Yes and No */
+			position: relative;
+			width: 100%;
+			max-width: 400px;
+		}
+
+		button {
+			padding: 12px 30px;
+			font-size: 18px;
+			cursor: pointer;
+			border: none;
+			border-radius: 25px;
+			transition: all 0.3s ease;
+			font-weight: bold;
+			box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+			z-index: 1001;
+		}
+
+		#yesBtn {
+			background-color: #ff4d6d;
+			color: white;
+		}
+
+		#yesBtn:hover {
+			transform: scale(1.1);
+		}
+
+		#noBtn {
+			background-color: #555;
+			color: white;
+			position: relative; /* Changed to relative so it starts in the flow next to Yes */
+		}
+	</style>
+</head>
+<body>
+	<div id="overlay">
+		<h1>Are you ready? ❤️</h1>
+		<div class="btn-container">
+			<button id="yesBtn">Yes!</button>
+			<button id="noBtn">No</button>
+		</div>
+	</div>
+
+	<audio id="bg-music" loop>
+		<source src="Taylor Swift - Lover .mp3" type="audio/mpeg">
+	</audio>
+
+	<p id="mask"></p>
+
+	<script>
+		const phrase = "Will You Be My Valentine? ";
+		const mask = document.getElementById('mask');
+		const music = document.getElementById('bg-music');
+		const overlay = document.getElementById('overlay');
+		const noBtn = document.getElementById('noBtn');
+		const yesBtn = document.getElementById('yesBtn');
+		
+		// Make the "No" button run away
+		noBtn.addEventListener('mouseover', moveButton);
+		noBtn.addEventListener('touchstart', moveButton);
+
+		function moveButton(e) {
+			// Ensure the button stays absolute so it can "run" anywhere on the screen
+			noBtn.style.position = 'fixed'; 
+			
+			// Calculate padding so it doesn't stick to the very edge
+			const padding = 20;
+			const maxX = window.innerWidth - noBtn.clientWidth - padding;
+			const maxY = window.innerHeight - noBtn.clientHeight - padding;
+
+			// Generate a position that is definitely on screen
+			const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+			const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+			noBtn.style.left = randomX + 'px';
+			noBtn.style.top = randomY + 'px';
+			noBtn.style.right = 'auto'; // Reset right/bottom if they were set
+			noBtn.style.bottom = 'auto';
+		}
+
+		function startExperience() {
+			overlay.style.display = 'none';
+			music.play();
+			
+			const maxChars = 800000; 
+			let currentChars = 0;
+
+			function addMore() {
+				if (currentChars < maxChars) {
+					const chunk = 30; // Smaller chunks for a smoother, slower look
+					mask.appendChild(document.createTextNode(phrase.repeat(chunk)));
+					currentChars += chunk * phrase.length;
+					setTimeout(addMore, 60); // Much slower interval to match the song's pace
+				}
+			}
+			addMore();
+		}
+
+		yesBtn.addEventListener('click', startExperience);
+	</script>
+</body>
+</html>
