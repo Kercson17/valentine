@@ -14,8 +14,8 @@ body {
 p {
     font-family: 'Arial', sans-serif;
     font-weight: bold;
-    font-size: 9px;
-    line-height: 9px;
+    font-size: 7px;
+    line-height: 7px;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -38,7 +38,7 @@ p {
 
 @media (max-width: 600px) {
     p {
-        font-size: 7.5px;
-        line-height: 7.5px;
+        font-size: 5.5px;
+        line-height: 5.5px;
     }
 }
